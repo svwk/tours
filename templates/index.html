@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <main class="container mt-3">
+        <!-- HERO -->
+        <section class="jumbotron text-center mt-4"
+                 style="background: url('/static/images/bck.jpg'); background-position: center center">
+            <h1 class="display-4 toptext">Путешествуйте вместе с нами</h1>
+            <p class="lead toptext">Для тех, кого отвлекают дома</p>
+            <p class="mt-5 w-50 mx-auto toptext">Лучшие направления,где никто не будет вам мешать сидеть на берегу и
+                изучать
+                программирование, дизайн, разработку игр и управление продуктами</p>
+        </section>
+        <!-- CARDS -->
+        <div class="row mt-5">
+            {% for key in keys %}
+                <div class="col-4">
+                    <div class="card mb-4">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img class="card-img-top embed-responsive-item" src="/static/images/t{{ key }}.jpg" alt=""/>
+                        </div>
+                        <div class="card-body">
+                            <h2 class="h5 card-title">{{ tours[key].title }}</h2>
+                            <p class="card-text">{{ tours[key].description|truncate(80) }}</p>
+                            <a href="/tours/{{ key }}/" class="btn btn-sm btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

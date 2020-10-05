@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ super() }} - Туры {{ departures[active_dep] }}
+{% endblock %}
+{% block container %}
+    <main class="container mt-3">
+        <h1 class="display-5 mt-4 mb-4">Туры {{ departures[active_dep] }}</h1>
+        <p><strong>Найдено туров:</strong> {{ tours|length }}</p>
+        <p><strong>Стоимость туров:</strong> от {{ (tours.values()|min(attribute="price")).price }}
+            до {{ (tours.values()|max(attribute="price")).price }}</p>
+        <p><strong>Количество ночей:</strong> от {{ (tours.values()|min(attribute="nights")).nights }} ночей
+            до {{ (tours.values()|max(attribute="nights")).nights }} ночей</p>
+        <!-- CARDS -->
+        <div class="row mt-5">
+            {% for key in tours %}
+                <div class="col-4">
+                    <div class="card mb-4">
+                        <img src="/static/images/t{{ key }}.jpg" class="card-img-top img-fluid" alt="">
+                        <div class="card-body">
+                            <h2 class="h5 card-title">{{ tours[key].title }}</h2>
+                            <p class="card-text">{{ tours[key].description|truncate(80) }}</p>
+                            <a href="/tours/{{ key }}/" class="btn btn-sm btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
